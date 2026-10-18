@@ -1,0 +1,720 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Champion HVAC</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Big+Shoulders:wght@400;600;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root {
+    --ground: #0d0e10;
+    --panel: #16181b;
+    --panel-2: #1d2024;
+    --line: #2c2f34;
+    --ember: #dba727;
+    --ember-dim: #b98a1c;
+    --frost: #4a9fd8;
+    --ink: #ecedef;
+    --muted: #98a0ac;
+    --muted-dim: #6b727c;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: 'IBM Plex Sans', 'Segoe UI', system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  img { max-width: 100%; display: block; }
+
+  h1, h2, h3 {
+    font-family: 'Big Shoulders', 'Arial Narrow', sans-serif;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    text-wrap: balance;
+    margin: 0;
+    color: var(--ink);
+  }
+
+  .mono { font-family: 'IBM Plex Mono', 'Consolas', monospace; }
+
+  a { color: inherit; }
+
+  *:focus-visible {
+    outline: 2px solid var(--frost);
+    outline-offset: 3px;
+  }
+
+  .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ember);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+  }
+  .eyebrow > *, .eyebrow { flex-wrap: wrap; }
+  .eyebrow::before {
+    content: "";
+    width: 18px;
+    height: 1px;
+    background: var(--ember);
+    display: inline-block;
+  }
+
+  .wrap {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+
+  /* ---------- PHOTO BACKDROP UTILITY ---------- */
+  .photo-section {
+    position: relative;
+    background-color: var(--ground);
+    background-size: cover;
+    background-repeat: no-repeat;
+    overflow: hidden;
+  }
+  .photo-section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 75% 85% at 50% 42%, transparent 0%, rgba(23,25,28,0.55) 55%, var(--ground) 100%),
+      linear-gradient(rgba(23,25,28,0.32), rgba(23,25,28,0.62));
+    pointer-events: none;
+  }
+  .photo-section > .wrap { position: relative; z-index: 1; }
+
+  /* ---------- NAV ---------- */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    background: rgba(23, 25, 28, 0.88);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .navrow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 28px;
+    max-width: 1180px;
+    margin: 0 auto;
+    gap: 14px;
+    flex-wrap: nowrap;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    min-width: 0;
+    flex-shrink: 1;
+  }
+  .brand img.shield { height: 48px; width: 48px; object-fit: contain; flex-shrink: 0; }
+  .chrome-text {
+    background: linear-gradient(180deg,
+      #ffffff 0%,
+      #f2f4f6 12%,
+      #c7ccd2 24%,
+      #8b929c 38%,
+      #5f656d 50%,
+      #8b929c 62%,
+      #c7ccd2 76%,
+      #f2f4f6 88%,
+      #ffffff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    filter:
+      drop-shadow(0 1px 0 rgba(255,255,255,.35))
+      drop-shadow(0 -1px 0 rgba(0,0,0,.45))
+      drop-shadow(0 2px 1px rgba(0,0,0,.55))
+      drop-shadow(0 4px 5px rgba(0,0,0,.4));
+  }
+  .brand-name {
+    font-family: 'Alfa Slab One', serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+    line-height: 1;
+    min-width: 0;
+    white-space: nowrap;
+  }
+  .brand-name .hvac { font-size: 0.7em; }
+  nav.links {
+    display: flex;
+    gap: 28px;
+    font-size: 0.86rem;
+    font-weight: 500;
+    flex-shrink: 0;
+  }
+  nav.links a {
+    text-decoration: none;
+    color: var(--muted);
+    transition: color 0.15s ease;
+  }
+  nav.links a:hover, nav.links a:focus-visible { color: var(--frost); }
+  .call-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--ember);
+    color: #1a1206;
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 600;
+    font-size: 0.86rem;
+    padding: 10px 18px;
+    flex-shrink: 0;
+    white-space: nowrap;
+    border-radius: 3px;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background 0.15s ease;
+  }
+  .call-btn:hover, .call-btn:focus-visible { background: #ffb84d; }
+
+  @media (max-width: 760px) {
+    nav.links { display: none; }
+    .navrow { padding: 8px 16px; gap: 8px; }
+    .brand img.shield { height: 34px; width: 34px; }
+    .brand-name { font-size: 0.8rem; }
+    .call-btn { padding: 8px 12px; font-size: 0.74rem; gap: 5px; }
+  }
+  @media (max-width: 360px) {
+    .call-btn span.phone-text { display: none; }
+  }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    padding: 96px 0 88px;
+    border-bottom: 1px solid var(--line);
+    background-image: url('images/hero-furnace.jpg');
+    background-position: center 30%;
+  }
+  .hero-inner { max-width: 640px; }
+  .hero h1 {
+    font-size: clamp(2.8rem, 6vw, 4.6rem);
+    line-height: 0.96;
+    margin: 14px 0 18px;
+  }
+  .hero h1 em {
+    font-style: normal;
+    color: var(--ember);
+  }
+  .hero p.lede {
+    color: var(--ink);
+    opacity: 0.85;
+    font-size: 1.08rem;
+    margin: 0 0 30px;
+  }
+  .hero-ctas {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-bottom: 36px;
+  }
+  .btn-primary {
+    background: var(--ember);
+    color: #1a1206;
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 600;
+    font-size: 0.92rem;
+    padding: 14px 26px;
+    border-radius: 3px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .btn-primary:hover { background: #ffb84d; }
+  .btn-secondary {
+    border: 1px solid rgba(255,255,255,0.28);
+    color: var(--ink);
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 500;
+    font-size: 0.92rem;
+    padding: 14px 26px;
+    border-radius: 3px;
+    text-decoration: none;
+    background: rgba(23,25,28,0.4);
+    backdrop-filter: blur(4px);
+  }
+  .btn-secondary:hover { border-color: var(--muted); }
+
+  .badge-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 4px;
+    overflow: hidden;
+    backdrop-filter: blur(6px);
+  }
+  .badge-row .badge {
+    background: rgba(23,25,28,0.55);
+    padding: 12px 10px;
+    text-align: center;
+  }
+  .badge .num {
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--ember);
+    font-size: 0.74rem;
+    letter-spacing: 0.03em;
+    font-weight: 600;
+  }
+  .badge .lbl {
+    font-size: 0.68rem;
+    color: var(--muted);
+    margin-top: 3px;
+    letter-spacing: 0.02em;
+  }
+  @media (max-width: 560px) {
+    .badge-row { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  /* ---------- SECTION SHELL ---------- */
+  section { padding: 68px 0; }
+  .sec-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 24px;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+  }
+  .sec-head h2 { font-size: clamp(1.7rem, 3vw, 2.3rem); line-height: 1; }
+  .border-top { border-top: 1px solid var(--line); }
+  .bg-panel { background: var(--panel); }
+
+  /* ---------- SERVICES ---------- */
+  .svc-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  @media (max-width: 860px) { .svc-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 560px) { .svc-grid { grid-template-columns: 1fr; } }
+  .svc-card {
+    background: var(--ground);
+    padding: 18px 20px;
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+  }
+  .svc-card .tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.66rem;
+    color: var(--muted-dim);
+    flex-shrink: 0;
+  }
+  .svc-card h3 {
+    font-size: 1.02rem;
+    font-weight: 600;
+    text-transform: none;
+    letter-spacing: 0;
+    font-family: 'IBM Plex Sans', sans-serif;
+  }
+
+  /* ---------- BEFORE/AFTER CAROUSEL ---------- */
+  .ba-shell {
+    position: relative;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    overflow: hidden;
+    background: var(--panel);
+  }
+  .ba-track {
+    display: flex;
+    transition: transform 0.45s cubic-bezier(.6,0,.3,1);
+  }
+  .ba-slide {
+    min-width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  @media (max-width: 700px) { .ba-slide { grid-template-columns: 1fr; } }
+  .ba-half { position: relative; aspect-ratio: 4/3; overflow: hidden; }
+  .ba-half img { width: 100%; height: 100%; object-fit: cover; }
+  .ba-tag {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    padding: 5px 12px;
+    border-radius: 3px;
+    color: #1a1206;
+  }
+  .ba-tag.before { background: #e0562f; color: #241009; }
+  .ba-tag.after { background: var(--ember); }
+  .ba-caption {
+    padding: 14px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--line);
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .ba-caption .job {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--ember);
+    letter-spacing: 0.05em;
+  }
+  .ba-controls { display: flex; gap: 8px; align-items: center; }
+  .ba-btn {
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    border: 1px solid var(--line);
+    background: var(--ground);
+    color: var(--ink);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+  .ba-btn:hover { border-color: var(--ember); color: var(--ember); }
+  .ba-dots { display: flex; gap: 6px; margin-left: 4px; }
+  .ba-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--line);
+    cursor: pointer;
+    border: none; padding: 0;
+  }
+  .ba-dot.active { background: var(--ember); }
+
+  /* ---------- GUARANTEE (photo backdrop) ---------- */
+  .guarantee {
+    padding: 100px 0;
+    background-image: url('images/guarantee-bg.png');
+    background-position: center 20%;
+  }
+  .guarantee .wrap { max-width: 680px; text-align: center; margin: 0 auto; }
+  .guarantee .eyebrow { justify-content: center; }
+  .guarantee .eyebrow::before { display: none; }
+  .g-mark {
+    font-family: 'Big Shoulders', sans-serif;
+    font-weight: 800;
+    font-size: clamp(2.2rem, 5.5vw, 3.2rem);
+    line-height: 0.98;
+    margin: 10px 0 28px;
+  }
+  .g-mark em { font-style: normal; color: var(--ember); }
+  .g-lines {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .g-lines p {
+    margin: 0;
+    font-size: 1.02rem;
+    color: var(--ink);
+  }
+  .g-lines p b { color: var(--ember); font-weight: 600; }
+
+  /* ---------- REVIEWS (honest placeholder) ---------- */
+  .reviews-panel {
+    border: 1px dashed var(--line);
+    border-radius: 6px;
+    padding: 40px 36px;
+    text-align: center;
+    background: var(--panel);
+  }
+  .reviews-panel h3 {
+    font-size: 1.2rem;
+    text-transform: none;
+    letter-spacing: 0;
+    font-weight: 700;
+    margin-bottom: 8px;
+    font-family: 'IBM Plex Sans', sans-serif;
+  }
+  .reviews-panel p {
+    color: var(--muted);
+    max-width: 48ch;
+    margin: 0 auto;
+    font-size: 0.92rem;
+  }
+  .stars {
+    color: var(--line);
+    font-size: 1.2rem;
+    letter-spacing: 3px;
+    margin-bottom: 12px;
+  }
+
+  /* ---------- CONTACT / FOOTER ---------- */
+  .contact-band {
+    background: var(--panel);
+    border-top: 1px solid var(--line);
+    position: relative;
+    overflow: hidden;
+  }
+  .watermark {
+    position: absolute;
+    right: -6%;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 145%;
+    opacity: 0.05;
+    pointer-events: none;
+  }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 48px;
+    position: relative;
+    z-index: 1;
+  }
+  @media (max-width: 860px) { .contact-grid { grid-template-columns: 1fr; } }
+  .big-phone {
+    font-family: 'Big Shoulders', sans-serif;
+    font-weight: 700;
+    font-size: clamp(2.2rem, 5vw, 3.2rem);
+    color: var(--ember);
+    text-decoration: none;
+    display: inline-block;
+    line-height: 1;
+    letter-spacing: 0.01em;
+  }
+  .contact-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 24px;
+  }
+  .contact-list .row {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 12px;
+    font-size: 0.92rem;
+  }
+  .contact-list .row span:first-child { color: var(--muted-dim); font-family: 'IBM Plex Mono', monospace; font-size: 0.76rem; text-transform: uppercase; letter-spacing: 0.05em; }
+  .contact-list .row span:last-child { color: var(--ink); font-weight: 500; text-align: right; }
+
+  footer {
+    padding: 22px 0;
+    border-top: 1px solid var(--line);
+    position: relative;
+    z-index: 1;
+  }
+  .foot-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    font-size: 0.78rem;
+    color: var(--muted-dim);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+  <header>
+    <div class="navrow">
+      <a class="brand" href="#top">
+        <img class="shield" src="images/logo.png" alt="">
+        <span class="brand-name chrome-text">Champion <span class="hvac">HVAC</span></span>
+      </a>
+      <nav class="links">
+        <a href="#work">Our Work</a>
+        <a href="#services">Services</a>
+        <a href="#guarantee">Guarantee</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <a class="call-btn" href="tel:16138585213">☎ <span class="phone-text">(613) 858-5213</span></a>
+    </div>
+  </header>
+
+  <div id="top"></div>
+
+  <section class="hero photo-section">
+    <div class="wrap hero-inner">
+      <div class="eyebrow">Ottawa &amp; Surrounding Area</div>
+      <h1>Ottawa's<br><em>Comfort Champ.</em></h1>
+      <p class="lede">Furnaces, AC, gas lines &amp; more. Licensed, insured, 24/7.</p>
+      <div class="hero-ctas">
+        <a class="btn-primary" href="tel:16138585213">Call (613) 858-5213</a>
+        <a class="btn-secondary" href="#contact">Get a Free Quote</a>
+      </div>
+      <div class="badge-row">
+        <div class="badge"><div class="num">TSSA</div><div class="lbl">Registered</div></div>
+        <div class="badge"><div class="num">LICENSED</div><div class="lbl">&amp; Insured</div></div>
+        <div class="badge"><div class="num">24 / 7</div><div class="lbl">365 Days</div></div>
+        <div class="badge"><div class="num">GUARANTEED</div><div class="lbl">Satisfaction</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="work" class="border-top">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <div class="eyebrow">Before &amp; After</div>
+          <h2>Real Jobs, Real Results</h2>
+        </div>
+      </div>
+      <div class="ba-shell">
+        <div class="ba-track" id="ba-track">
+          <div class="ba-slide">
+            <div class="ba-half"><span class="ba-tag before">BEFORE</span><img src="images/condenser-before.jpg" alt="Overgrown, neglected AC condenser before service"></div>
+            <div class="ba-half"><span class="ba-tag after">AFTER</span><img src="images/condenser-after.jpg" alt="Clean new condenser installed on gravel pad"></div>
+          </div>
+          <div class="ba-slide">
+            <div class="ba-half"><span class="ba-tag before">BEFORE</span><img src="images/pump-before.jpg" alt="Corroded condensate pump before cleaning"></div>
+            <div class="ba-half"><span class="ba-tag after">AFTER</span><img src="images/pump-after.jpg" alt="Condensate pump fully cleaned and restored"></div>
+          </div>
+          <div class="ba-slide">
+            <div class="ba-half"><span class="ba-tag before">BEFORE</span><img src="images/tray-before.jpg" alt="Drain tray clogged with sludge before service"></div>
+            <div class="ba-half"><span class="ba-tag after">AFTER</span><img src="images/tray-after.jpg" alt="Drain tray cleaned and clear after service"></div>
+          </div>
+        </div>
+        <div class="ba-caption">
+          <div class="job mono" id="ba-job">CONDENSER REPLACEMENT</div>
+          <div class="ba-controls">
+            <button class="ba-btn" id="ba-prev" aria-label="Previous">←</button>
+            <div class="ba-dots" id="ba-dots"></div>
+            <button class="ba-btn" id="ba-next" aria-label="Next">→</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="services" class="border-top bg-panel">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <div class="eyebrow">What We Do</div>
+          <h2>Full-System Service</h2>
+        </div>
+      </div>
+      <div class="svc-grid">
+        <div class="svc-card"><span class="tag mono">01</span><h3>HVAC Service &amp; Repairs</h3></div>
+        <div class="svc-card"><span class="tag mono">02</span><h3>HVAC Installation</h3></div>
+        <div class="svc-card"><span class="tag mono">03</span><h3>Furnaces</h3></div>
+        <div class="svc-card"><span class="tag mono">04</span><h3>Hot Water Tanks</h3></div>
+        <div class="svc-card"><span class="tag mono">05</span><h3>Gas Lines</h3></div>
+        <div class="svc-card"><span class="tag mono">06</span><h3>Custom Ductwork</h3></div>
+        <div class="svc-card"><span class="tag mono">07</span><h3>Humidifiers</h3></div>
+        <div class="svc-card"><span class="tag mono">08</span><h3>Indoor Air Quality</h3></div>
+        <div class="svc-card"><span class="tag mono">09</span><h3>Cleanings &amp; Maintenance</h3></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="guarantee" class="guarantee photo-section border-top">
+    <div class="wrap">
+      <div class="eyebrow">Our Word</div>
+      <div class="g-mark">Satisfaction.<br><em>Guaranteed.</em></div>
+      <div class="g-lines">
+        <p><b>Unsatisfied?</b> We redo it — no cost, no arguing.</p>
+        <p><b>Local business.</b> TSSA registered, fully insured.</p>
+        <p>Every job done by a <b>licensed technician.</b></p>
+      </div>
+    </div>
+  </section>
+
+  <section id="reviews" class="border-top bg-panel">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <div class="eyebrow">Customer Reviews</div>
+          <h2>Hear It From Ottawa</h2>
+        </div>
+      </div>
+      <div class="reviews-panel">
+        <div class="stars">★★★★★</div>
+        <h3>Reviews are on the way</h3>
+        <p>Champion HVAC's Google Business Profile is being set up now. Real customer reviews will appear here automatically once it's verified.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="border-top contact-band">
+    <img class="watermark" src="images/logo.png" alt="">
+    <div class="wrap contact-grid">
+      <div>
+        <div class="eyebrow">Get In Touch</div>
+        <h2 style="margin-bottom:18px;">Call Now, Talk<br>To A Real Tech.</h2>
+        <a class="big-phone" href="tel:16138585213">(613) 858-5213</a>
+      </div>
+      <div class="contact-list">
+        <div class="row"><span>Email</span><span>hvacchampion@outlook.com</span></div>
+        <div class="row"><span>Service Area</span><span>Ottawa &amp; Surrounding Region</span></div>
+        <div class="row"><span>Availability</span><span>24/7/365</span></div>
+        <div class="row"><span>Licensing</span><span>TSSA Registered · Fully Insured</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="contact-band">
+    <footer>
+      <div class="wrap foot-row">
+        <span class="mono">CHAMPION HVAC — OTTAWA, ON</span>
+        <span class="mono">TSSA REGISTERED · LICENSED &amp; INSURED</span>
+      </div>
+    </footer>
+  </div>
+
+<script>
+(function() {
+  var track = document.getElementById('ba-track');
+  var dotsWrap = document.getElementById('ba-dots');
+  var jobLabel = document.getElementById('ba-job');
+  var slides = track.children.length;
+  var jobs = ['CONDENSER REPLACEMENT', 'CONDENSATE PUMP SERVICE', 'DRAIN TRAY CLEANING'];
+  var idx = 0;
+
+  for (var i = 0; i < slides; i++) {
+    var dot = document.createElement('button');
+    dot.className = 'ba-dot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+    (function(i){ dot.addEventListener('click', function(){ go(i); }); })(i);
+    dotsWrap.appendChild(dot);
+  }
+
+  function go(n) {
+    idx = (n + slides) % slides;
+    track.style.transform = 'translateX(-' + (idx * 100) + '%)';
+    jobLabel.textContent = jobs[idx];
+    var dots = dotsWrap.querySelectorAll('.ba-dot');
+    dots.forEach(function(d, i2){ d.classList.toggle('active', i2 === idx); });
+  }
+  document.getElementById('ba-prev').addEventListener('click', function(){ go(idx - 1); });
+  document.getElementById('ba-next').addEventListener('click', function(){ go(idx + 1); });
+})();
+</script>
+
+</body>
+</html>
+
+</body></html>
