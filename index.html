@@ -315,26 +315,63 @@
   }
   @media (max-width: 860px) { .svc-grid { grid-template-columns: repeat(2, 1fr); } }
   @media (max-width: 560px) { .svc-grid { grid-template-columns: 1fr; } }
+  .svc-grid { align-items: start; }
   .svc-card {
     background: var(--ground);
-    padding: 18px 20px;
+  }
+  .svc-head {
+    all: unset;
+    box-sizing: border-box;
+    cursor: pointer;
     display: flex;
     align-items: baseline;
     gap: 12px;
+    width: 100%;
+    padding: 18px 20px;
   }
-  .svc-card .tag {
+  .svc-head:hover, .svc-head:focus-visible { background: rgba(255,255,255,0.03); }
+  .svc-head .tag {
     font-family: 'IBM Plex Mono', monospace;
     font-size: 0.66rem;
     color: var(--muted-dim);
     flex-shrink: 0;
   }
-  .svc-card h3 {
+  .svc-head h3 {
     font-size: 1.02rem;
     font-weight: 600;
     text-transform: none;
     letter-spacing: 0;
     font-family: 'IBM Plex Sans', sans-serif;
+    flex: 1;
   }
+  .svc-chev {
+    color: var(--muted-dim);
+    font-size: 0.78rem;
+    flex-shrink: 0;
+    transition: transform 0.2s ease, color 0.2s ease;
+  }
+  .svc-head[aria-expanded="true"] .svc-chev { transform: rotate(180deg); color: var(--ember); }
+  .svc-detail { padding: 0 20px 20px; }
+  .svc-detail p {
+    margin: 0 0 14px;
+    color: var(--muted);
+    font-size: 0.9rem;
+    line-height: 1.55;
+  }
+  .svc-book {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--ember);
+    color: #1a1206;
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 600;
+    font-size: 0.82rem;
+    padding: 10px 18px;
+    border-radius: 3px;
+    text-decoration: none;
+  }
+  .svc-book:hover, .svc-book:focus-visible { background: #ffb84d; }
 
   /* ---------- BEFORE/AFTER CAROUSEL ---------- */
   .ba-shell {
@@ -674,16 +711,70 @@
           <h2>Full-System Service</h2>
         </div>
       </div>
-      <div class="svc-grid">
-        <div class="svc-card"><span class="tag mono">01</span><h3>HVAC Service &amp; Repairs</h3></div>
-        <div class="svc-card"><span class="tag mono">02</span><h3>HVAC Installation</h3></div>
-        <div class="svc-card"><span class="tag mono">03</span><h3>Furnaces</h3></div>
-        <div class="svc-card"><span class="tag mono">04</span><h3>Hot Water Tanks</h3></div>
-        <div class="svc-card"><span class="tag mono">05</span><h3>Gas Lines</h3></div>
-        <div class="svc-card"><span class="tag mono">06</span><h3>Custom Ductwork</h3></div>
-        <div class="svc-card"><span class="tag mono">07</span><h3>Humidifiers</h3></div>
-        <div class="svc-card"><span class="tag mono">08</span><h3>Indoor Air Quality</h3></div>
-        <div class="svc-card"><span class="tag mono">09</span><h3>Cleanings &amp; Maintenance</h3></div>
+      <div class="svc-grid" id="svc-grid">
+        <div class="svc-card">
+          <button class="svc-head" aria-expanded="false" aria-controls="svc-d1"><span class="tag mono">01</span><h3>HVAC Service &amp; Repairs</h3><span class="svc-chev" aria-hidden="true">&#9662;</span></button>
+          <div class="svc-detail" id="svc-d1" hidden>
+            <p>Furnace acting up? AC not keeping up? We diagnose the real problem fast and fix it right the first time &mdash; no guessing games, no upsells you don't need.</p>
+            <a class="svc-book" href="tel:16138585213">Book Now &mdash; (613) 858-5213</a>
+          </div>
+        </div>
+        <div class="svc-card">
+          <button class="svc-head" aria-expanded="false" aria-controls="svc-d2"><span class="tag mono">02</span><h3>HVAC Installation</h3><span class="svc-chev" aria-hidden="true">&#9662;</span></button>
+          <div class="svc-detail" id="svc-d2" hidden>
+            <p>New furnace, AC, or full system? We size it right for your home, install it clean, and walk you through everything before we leave.</p>
+            <a class="svc-book" href="tel:16138585213">Book Now &mdash; (613) 858-5213</a>
+          </div>
+        </div>
+        <div class="svc-card">
+          <button class="svc-head" aria-expanded="false" aria-controls="svc-d3"><span class="tag mono">03</span><h3>Furnaces</h3><span class="svc-chev" aria-hidden="true">&#9662;</span></button>
+          <div class="svc-detail" id="svc-d3" hidden>
+            <p>From a quick repair to a full replacement, we work on all major furnace brands &mdash; high-efficiency units installed properly, older ones serviced to squeeze out a few more winters.</p>
+            <a class="svc-book" href="tel:16138585213">Book Now &mdash; (613) 858-5213</a>
+          </div>
+        </div>
+        <div class="svc-card">
+          <button class="svc-head" aria-expanded="false" aria-controls="svc-d4"><span class="tag mono">04</span><h3>Hot Water Tanks</h3><span class="svc-chev" aria-hidden="true">&#9662;</span></button>
+          <div class="svc-detail" id="svc-d4" hidden>
+            <p>Tank or tankless, gas or electric &mdash; installed, repaired, or replaced. We'll help you pick the right size so you're never stuck with a cold shower.</p>
+            <a class="svc-book" href="tel:16138585213">Book Now &mdash; (613) 858-5213</a>
+          </div>
+        </div>
+        <div class="svc-card">
+          <button class="svc-head" aria-expanded="false" aria-controls="svc-d5"><span class="tag mono">05</span><h3>Gas Lines</h3><span class="svc-chev" aria-hidden="true">&#9662;</span></button>
+          <div class="svc-detail" id="svc-d5" hidden>
+            <p>Licensed gas fitting for furnaces, fireplaces, stoves, BBQ hookups, and more. TSSA registered, done to code, every time.</p>
+            <a class="svc-book" href="tel:16138585213">Book Now &mdash; (613) 858-5213</a>
+          </div>
+        </div>
+        <div class="svc-card">
+          <button class="svc-head" aria-expanded="false" aria-controls="svc-d6"><span class="tag mono">06</span><h3>Custom Ductwork</h3><span class="svc-chev" aria-hidden="true">&#9662;</span></button>
+          <div class="svc-detail" id="svc-d6" hidden>
+            <p>Uneven heating? Rooms that never cool down? We design and install ductwork that actually moves air where it needs to go.</p>
+            <a class="svc-book" href="tel:16138585213">Book Now &mdash; (613) 858-5213</a>
+          </div>
+        </div>
+        <div class="svc-card">
+          <button class="svc-head" aria-expanded="false" aria-controls="svc-d7"><span class="tag mono">07</span><h3>Humidifiers</h3><span class="svc-chev" aria-hidden="true">&#9662;</span></button>
+          <div class="svc-detail" id="svc-d7" hidden>
+            <p>Dry winter air cracking your skin and your furniture? We install whole-home humidifiers that tie right into your existing system.</p>
+            <a class="svc-book" href="tel:16138585213">Book Now &mdash; (613) 858-5213</a>
+          </div>
+        </div>
+        <div class="svc-card">
+          <button class="svc-head" aria-expanded="false" aria-controls="svc-d8"><span class="tag mono">08</span><h3>Indoor Air Quality</h3><span class="svc-chev" aria-hidden="true">&#9662;</span></button>
+          <div class="svc-detail" id="svc-d8" hidden>
+            <p>Air purifiers, filtration upgrades, and ventilation fixes to cut down on dust, allergens, and odors &mdash; so the air inside is actually clean.</p>
+            <a class="svc-book" href="tel:16138585213">Book Now &mdash; (613) 858-5213</a>
+          </div>
+        </div>
+        <div class="svc-card">
+          <button class="svc-head" aria-expanded="false" aria-controls="svc-d9"><span class="tag mono">09</span><h3>Cleanings &amp; Maintenance</h3><span class="svc-chev" aria-hidden="true">&#9662;</span></button>
+          <div class="svc-detail" id="svc-d9" hidden>
+            <p>Regular maintenance catches small problems before they turn into expensive ones. We clean, inspect, and tune up your system so it runs efficiently all year.</p>
+            <a class="svc-book" href="tel:16138585213">Book Now &mdash; (613) 858-5213</a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -855,6 +946,18 @@
 
   var auto = setInterval(function(){ go(idx + 1); }, 7000);
   track.addEventListener('mouseenter', function(){ clearInterval(auto); });
+})();
+
+(function() {
+  var heads = document.querySelectorAll('.svc-head');
+  heads.forEach(function(head) {
+    head.addEventListener('click', function() {
+      var detail = document.getElementById(head.getAttribute('aria-controls'));
+      var open = head.getAttribute('aria-expanded') === 'true';
+      head.setAttribute('aria-expanded', open ? 'false' : 'true');
+      detail.hidden = open;
+    });
+  });
 })();
 </script>
 
