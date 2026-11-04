@@ -435,33 +435,78 @@
   }
   .g-lines p b { color: var(--ember); font-weight: 600; }
 
-  /* ---------- REVIEWS (honest placeholder) ---------- */
-  .reviews-panel {
-    border: 1px dashed var(--line);
-    border-radius: 6px;
-    padding: 40px 36px;
-    text-align: center;
-    background: var(--panel);
-  }
-  .reviews-panel h3 {
-    font-size: 1.2rem;
-    text-transform: none;
-    letter-spacing: 0;
-    font-weight: 700;
-    margin-bottom: 8px;
-    font-family: 'IBM Plex Sans', sans-serif;
-  }
-  .reviews-panel p {
-    color: var(--muted);
-    max-width: 48ch;
-    margin: 0 auto;
-    font-size: 0.92rem;
-  }
+  /* ---------- REVIEWS ---------- */
   .stars {
-    color: var(--line);
+    color: var(--ember);
     font-size: 1.2rem;
     letter-spacing: 3px;
-    margin-bottom: 12px;
+  }
+  .rv-summary {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+  .rv-summary-text {
+    font-size: 0.92rem;
+    color: var(--muted);
+  }
+  .rv-summary-text b { color: var(--ink); }
+  .rv-summary-text a { color: var(--frost); text-decoration: none; }
+  .rv-summary-text a:hover, .rv-summary-text a:focus-visible { text-decoration: underline; }
+  .rv-shell {
+    position: relative;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    overflow: hidden;
+    background: var(--panel);
+  }
+  .rv-track {
+    display: flex;
+    transition: transform 0.45s cubic-bezier(.6,0,.3,1);
+  }
+  .rv-slide {
+    min-width: 100%;
+    padding: 44px 48px;
+  }
+  @media (max-width: 700px) { .rv-slide { padding: 30px 24px; } }
+  .rv-stars {
+    color: var(--ember);
+    font-size: 1rem;
+    letter-spacing: 3px;
+    margin-bottom: 18px;
+  }
+  .rv-quote {
+    font-size: 1.14rem;
+    line-height: 1.55;
+    color: var(--ink);
+    max-width: 62ch;
+    margin: 0;
+  }
+  .rv-quote::before { content: "\201C"; color: var(--ember); }
+  .rv-quote::after { content: "\201D"; color: var(--ember); }
+  .rv-foot {
+    margin-top: 24px;
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .rv-name {
+    font-weight: 600;
+    font-size: 0.96rem;
+  }
+  .rv-sub {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--muted-dim);
+  }
+  .rv-caption {
+    padding: 14px 20px;
+    display: flex;
+    justify-content: flex-end;
+    border-top: 1px solid var(--line);
   }
 
   /* ---------- CONTACT / FOOTER ---------- */
@@ -589,10 +634,6 @@
             <div class="ba-half"><span class="ba-tag after">AFTER</span><img src="images/condenser-after.jpg" alt="Clean new condenser installed on gravel pad"></div>
           </div>
           <div class="ba-slide">
-            <div class="ba-half"><span class="ba-tag before">BEFORE</span><img src="images/pump-before.jpg" alt="Corroded condensate pump before cleaning"></div>
-            <div class="ba-half"><span class="ba-tag after">AFTER</span><img src="images/pump-after.jpg" alt="Condensate pump fully cleaned and restored"></div>
-          </div>
-          <div class="ba-slide">
             <div class="ba-half"><span class="ba-tag before">BEFORE</span><img src="images/tray-before.jpg" alt="Drain tray clogged with sludge before service"></div>
             <div class="ba-half"><span class="ba-tag after">AFTER</span><img src="images/tray-after.jpg" alt="Drain tray cleaned and clear after service"></div>
           </div>
@@ -651,10 +692,70 @@
           <h2>Hear It From Ottawa</h2>
         </div>
       </div>
-      <div class="reviews-panel">
-        <div class="stars">★★★★★</div>
-        <h3>Reviews are on the way</h3>
-        <p>Champion HVAC's Google Business Profile is being set up now. Real customer reviews will appear here automatically once it's verified.</p>
+      <div class="rv-summary">
+        <div class="stars" aria-hidden="true">★★★★★</div>
+        <div class="rv-summary-text"><b>5.0</b> out of 5 — based on <a href="https://www.google.com/maps/place/Champion+HVAC/@45.2911963,-75.8173837,17z/data=!4m6!3m5!1s0x296c8d125295fc21:0x941a26c2acc4b5d!8m2!3d45.2911963!4d-75.8173837" target="_blank" rel="noopener">10 Google reviews</a></div>
+      </div>
+      <div class="rv-shell">
+        <div class="rv-track" id="rv-track">
+          <div class="rv-slide">
+            <div class="rv-stars">★★★★★</div>
+            <p class="rv-quote">I used Jon from Champion for a project that required a large amount of planning, rerouting and tin work. Great to deal with, highly recommend</p>
+            <div class="rv-foot"><span class="rv-name">Colin Hickey</span><span class="rv-sub mono">Local Guide · 6 reviews</span></div>
+          </div>
+          <div class="rv-slide">
+            <div class="rv-stars">★★★★★</div>
+            <p class="rv-quote">Jon of Champion HVAC is highly recommended. He did HVAC work in my home and as a realtor, I often recommend him to clients. His work is meticulous, his prices are competitive and he is honest. Five star service all the way.</p>
+            <div class="rv-foot"><span class="rv-name">Betty Marchington</span><span class="rv-sub mono">1 review</span></div>
+          </div>
+          <div class="rv-slide">
+            <div class="rv-stars">★★★★★</div>
+            <p class="rv-quote">Jon from Champion HVAC did a great job on my HVAC project. I'm happy with the work, and the price was fair. I'd gladly hire Jon again and recommend Champion HVAC to anyone looking for HVAC service.</p>
+            <div class="rv-foot"><span class="rv-name">J.A Garcia</span></div>
+          </div>
+          <div class="rv-slide">
+            <div class="rv-stars">★★★★★</div>
+            <p class="rv-quote">Jon provided excellent service! He was professional, knowledgeable, reliable, and very efficient. The quality of his work exceeded my expectations. I highly recommend Jon for any HVAC needs!</p>
+            <div class="rv-foot"><span class="rv-name">Parvin Makhzani</span><span class="rv-sub mono">3 reviews</span></div>
+          </div>
+          <div class="rv-slide">
+            <div class="rv-stars">★★★★★</div>
+            <p class="rv-quote">I had a great experience with Jon. He was professional, easy to work with, and finished the job very well and efficiently. I'd happily recommend him to anyone looking for HVAC service.</p>
+            <div class="rv-foot"><span class="rv-name">Owen Powers</span><span class="rv-sub mono">8 reviews</span></div>
+          </div>
+          <div class="rv-slide">
+            <div class="rv-stars">★★★★★</div>
+            <p class="rv-quote">We have used Jon on multiple jobs. It has always been a great experience! High quality work and amazing service. I highly recommend Champion HVAC!</p>
+            <div class="rv-foot"><span class="rv-name">Joey Decker</span><span class="rv-sub mono">4 reviews</span></div>
+          </div>
+          <div class="rv-slide">
+            <div class="rv-stars">★★★★★</div>
+            <p class="rv-quote">Jon went above and beyond when he worked on our air conditioner, we were so impressed. Efficient, knowledgeable and honest, he actually saved us money! Jon took the time to follow up after he had completed the service, which was something we did not expect. Champion HVAC will be our go to from now on.</p>
+            <div class="rv-foot"><span class="rv-name">Tanya Black</span><span class="rv-sub mono">Local Guide · 10 reviews</span></div>
+          </div>
+          <div class="rv-slide">
+            <div class="rv-stars">★★★★★</div>
+            <p class="rv-quote">We've had Jon over several times to do work around our house, both big and small. Each and every time Jon is kind and professional while always being willing to answer any question so we can decide the best solution.</p>
+            <div class="rv-foot"><span class="rv-name">Ryan Gushulak</span><span class="rv-sub mono">5 reviews</span></div>
+          </div>
+          <div class="rv-slide">
+            <div class="rv-stars">★★★★★</div>
+            <p class="rv-quote">Had a great experience dealing with Jon, he was very knowledgeable and friendly.</p>
+            <div class="rv-foot"><span class="rv-name">Anton Koher</span><span class="rv-sub mono">Local Guide · 10 reviews</span></div>
+          </div>
+          <div class="rv-slide">
+            <div class="rv-stars">★★★★★</div>
+            <p class="rv-quote">Super impressed with Jon's services. Absolutely incredible customer service, and the job itself was done more efficiently than I could've ever asked for. 100% would choose him again, and recommend to anybody I know. Thanks again, Jon.</p>
+            <div class="rv-foot"><span class="rv-name">Liam Carpenter</span><span class="rv-sub mono">5 reviews</span></div>
+          </div>
+        </div>
+        <div class="rv-caption">
+          <div class="ba-controls">
+            <button class="ba-btn" id="rv-prev" aria-label="Previous review">←</button>
+            <div class="ba-dots" id="rv-dots"></div>
+            <button class="ba-btn" id="rv-next" aria-label="Next review">→</button>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -691,7 +792,7 @@
   var dotsWrap = document.getElementById('ba-dots');
   var jobLabel = document.getElementById('ba-job');
   var slides = track.children.length;
-  var jobs = ['CONDENSER REPLACEMENT', 'CONDENSATE PUMP SERVICE', 'DRAIN TRAY CLEANING'];
+  var jobs = ['CONDENSER REPLACEMENT', 'DRAIN TRAY CLEANING'];
   var idx = 0;
 
   for (var i = 0; i < slides; i++) {
@@ -711,6 +812,33 @@
   }
   document.getElementById('ba-prev').addEventListener('click', function(){ go(idx - 1); });
   document.getElementById('ba-next').addEventListener('click', function(){ go(idx + 1); });
+})();
+
+(function() {
+  var track = document.getElementById('rv-track');
+  var dotsWrap = document.getElementById('rv-dots');
+  var slides = track.children.length;
+  var idx = 0;
+
+  for (var i = 0; i < slides; i++) {
+    var dot = document.createElement('button');
+    dot.className = 'ba-dot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('aria-label', 'Go to review ' + (i + 1));
+    (function(i){ dot.addEventListener('click', function(){ go(i); }); })(i);
+    dotsWrap.appendChild(dot);
+  }
+
+  function go(n) {
+    idx = (n + slides) % slides;
+    track.style.transform = 'translateX(-' + (idx * 100) + '%)';
+    var dots = dotsWrap.querySelectorAll('.ba-dot');
+    dots.forEach(function(d, i2){ d.classList.toggle('active', i2 === idx); });
+  }
+  document.getElementById('rv-prev').addEventListener('click', function(){ go(idx - 1); });
+  document.getElementById('rv-next').addEventListener('click', function(){ go(idx + 1); });
+
+  var auto = setInterval(function(){ go(idx + 1); }, 7000);
+  track.addEventListener('mouseenter', function(){ clearInterval(auto); });
 })();
 </script>
 
