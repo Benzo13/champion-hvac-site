@@ -356,6 +356,10 @@
   @media (max-width: 700px) { .ba-slide { grid-template-columns: 1fr; } }
   .ba-half { position: relative; aspect-ratio: 4/3; overflow: hidden; }
   .ba-half img { width: 100%; height: 100%; object-fit: cover; }
+  .ba-slide.single { grid-template-columns: 1fr; }
+  .ba-slide.single .ba-half { aspect-ratio: 3/4; max-width: 420px; margin: 0 auto; }
+  @media (max-width: 700px) { .ba-slide.single .ba-half { max-width: 320px; } }
+  .ba-tag.complete { background: var(--ember); }
   .ba-tag {
     position: absolute;
     top: 14px;
@@ -637,6 +641,18 @@
             <div class="ba-half"><span class="ba-tag before">BEFORE</span><img src="images/tray-before.jpg" alt="Drain tray clogged with sludge before service"></div>
             <div class="ba-half"><span class="ba-tag after">AFTER</span><img src="images/tray-after.jpg" alt="Drain tray cleaned and clear after service"></div>
           </div>
+          <div class="ba-slide single">
+            <div class="ba-half"><span class="ba-tag complete">NEW INSTALL</span><img src="images/furnace-install.jpg" alt="New high-efficiency furnace installation"></div>
+          </div>
+          <div class="ba-slide single">
+            <div class="ba-half"><span class="ba-tag complete">NEW INSTALL</span><img src="images/water-heater-install.jpg" alt="Commercial-grade dual water heater installation"></div>
+          </div>
+          <div class="ba-slide single">
+            <div class="ba-half"><span class="ba-tag complete">NEW INSTALL</span><img src="images/ac-install.jpg" alt="New outdoor AC condenser installation"></div>
+          </div>
+          <div class="ba-slide single">
+            <div class="ba-half"><span class="ba-tag complete">NEW INSTALL</span><img src="images/fireplace-install.jpg" alt="Gas fireplace insert installation"></div>
+          </div>
         </div>
         <div class="ba-caption">
           <div class="job mono" id="ba-job">CONDENSER REPLACEMENT</div>
@@ -792,7 +808,7 @@
   var dotsWrap = document.getElementById('ba-dots');
   var jobLabel = document.getElementById('ba-job');
   var slides = track.children.length;
-  var jobs = ['CONDENSER REPLACEMENT', 'DRAIN TRAY CLEANING'];
+  var jobs = ['CONDENSER REPLACEMENT', 'DRAIN TRAY CLEANING', 'FURNACE INSTALL', 'WATER HEATER INSTALL', 'AC CONDENSER INSTALL', 'FIREPLACE INSERT INSTALL'];
   var idx = 0;
 
   for (var i = 0; i < slides; i++) {
